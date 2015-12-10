@@ -398,7 +398,9 @@ define apache::vhost(
   }
 
   if $ip {
-    $_ip = enclose_ipv6($ip)
+    # GWDG: Disable enclose_ipv6() for now, so that '*' works for vhosts in vagrant
+#    $_ip = enclose_ipv6($ip)
+    $_ip = $ip
     if $port {
       $listen_addr_port = suffix(any2array($_ip),":${port}")
       $nvh_addr_port = suffix(any2array($_ip),":${port}")
